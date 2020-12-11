@@ -1,8 +1,10 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Text_finder {
 
@@ -38,12 +40,19 @@ public class Text_finder {
 
         Pattern pattern = Pattern.compile("[0-9]{3,4}");
         Matcher matcher = pattern.matcher(fileEnter(file_name));
-        String output = nowDate() + "\n";
+        String output = "\n" +  file_name + ": " + nowDate();
         while (matcher.find()) {
             for (int i = 0; i <= matcher.groupCount(); i++)
                 output += "\n"  + matcher.group(i);
         }
 
-        System.out.print(output);
+        try (FileWriter writer = new FileWriter("container.txt"))
+        {
+            writer.write(output);
+            writer.append('\n');
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("\nЗапись не удалась!!!");
+        }
     }
 }
