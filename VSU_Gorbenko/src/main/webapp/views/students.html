@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/resources/js/marks.js"></script>
+    <meta charset="UTF-8">
+    <title>Lab 8</title>
+</head>
+<body>
+
+<div class="container">
+    <p>All students: </p>
+    <table class="thead-dark">
+        <thead>
+        <tr>
+            <th scope="row" class="col-auto">ID:</th>
+            <th scope="row" class="col-auto">Name:</th>
+            <th scope="row" class="col-auto">Surname:</th>
+            <th scope="row" class="col-auto">Stipend:</th>
+            <th scope="row" class="col-auto">Kurs:</th>
+            <th scope="row" class="col-auto">City:</th>
+            <th scope="row" class="col-auto">Age:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td scope="row" class="col-auto" th:text="${student.getId()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getName()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getSurname()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getStipend()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getKurs()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getCity()}">text</td>
+            <td scope="row" class="col-auto" th:text="${student.getAge()}">text</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+<div class="container">
+    <p>Selected students: </p>
+    <table class="thead-dark">
+        <thead>
+        <tr>
+            <th scope="row" class="col-auto">ID:</th>
+            <th scope="row" class="col-auto">Name:</th>
+            <th scope="row" class="col-auto">Surname:</th>
+            <th scope="row" class="col-auto">Stipend:</th>
+            <th scope="row" class="col-auto">Kurs:</th>
+            <th scope="row" class="col-auto">City:</th>
+            <th scope="row" class="col-auto">Age:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="selectedstudent : ${selectedstudents}">
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getId()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getName()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getSurname()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getStipend()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getKurs()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getCity()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedstudent.getAge()}">text</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a type="button" class="btn btn-secondary" href="/subjects">To 9 lab</a>
+</div>
+
+
+</body>
+</html>

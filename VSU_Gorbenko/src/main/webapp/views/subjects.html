@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/resources/js/marks.js"></script>
+    <meta charset="UTF-8">
+    <title>Lab 9</title>
+</head>
+<body>
+
+<div class="container">
+    <p>All subjects: </p>
+    <table class="thead-dark">
+        <thead>
+        <tr>
+            <th scope="row" class="col-auto">ID:</th>
+            <th scope="row" class="col-auto">Name:</th>
+            <th scope="row" class="col-auto">Hour:</th>
+            <th scope="row" class="col-auto">Semester:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subject : ${subjects}">
+            <td scope="row" class="col-auto" th:text="${subject.getId()}">text</td>
+            <td scope="row" class="col-auto" th:text="${subject.getName()}">text</td>
+            <td scope="row" class="col-auto" th:text="${subject.getHour()}">text</td>
+            <td scope="row" class="col-auto" th:text="${subject.getSemester()}">text</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+<div class="container">
+    <p>Subjects with the most hours in semester: </p>
+    <table class="thead-dark">
+        <thead>
+        <tr>
+            <th scope="row" class="col-auto">ID:</th>
+            <th scope="row" class="col-auto">Name:</th>
+            <th scope="row" class="col-auto">Hour:</th>
+            <th scope="row" class="col-auto">Semester:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="selectedsubject : ${selectedsubjects}">
+            <td scope="row" class="col-auto" th:text="${selectedsubject.getId()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedsubject.getName()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedsubject.getHour()}">text</td>
+            <td scope="row" class="col-auto" th:text="${selectedsubject.getSemester()}">text</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a type="button" class="btn btn-secondary" href="/students">To 8 lab</a>
+</div>
+</body>
+</html>
