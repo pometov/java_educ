@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,10 +16,10 @@ public class Text_finder {
     private static final String parseInfo  = "#ParseInfo:";
     private static final String datePattern  = "dd.MM.yyyy HH:mm:ss";
 
-    private static Pair<String, String> fileEnter(String n) throws IOException
+    private static FileContent fileEnter(String n) throws IOException
     {
         File file = new File(n);
-        return new Pair<>(file.getName(), fileEnter(file));
+        return new FileContent(file.getName(), fileEnter(file));
     }
 
     private static String fileEnter(File file) throws IOException
@@ -91,8 +89,9 @@ public class Text_finder {
         return currentDate;
     }
 
-    private static Pair <String, Boolean> textContainer (String keyToFind, String text, Date currentDate) throws ParseException
+    private static ContainerContent textContainer (String keyToFind, String text, Date currentDate) throws ParseException
     {
+        ContainerContent containerData = new ContainerContent();
         String name = (" " + keyToFind);
         int x = text.indexOf(name);
         if (x > 0)
@@ -106,28 +105,32 @@ public class Text_finder {
             {
                 String newContainer = text.substring(0, parseInfoStart);
                 String addContainer = "";
-                int poison = text.indexOf(parseInfo, x);
-                if (poison > 0) addContainer = text.substring(poison);
-                return new Pair<>(newContainer+addContainer, true);
+                int position = text.indexOf(parseInfo, x);
+                if (position > 0) addContainer = text.substring(position);
+                containerData.content = newContainer+addContainer;
+                containerData.needChange = true;
+                return containerData;
             }
-            return new Pair<>(null, false);
+            return containerData;
         }
-        return new Pair<>(text, true);
+        containerData.content = text;
+        containerData.needChange = true;
+        return containerData;
     }
 
 
 
-    public static void main(String[] args) throws IOException, ParseException {
-
+    public static void main(String[] args) throws IOException, ParseException
+    {
         System.out.print("Введите название фаила: ");
         Scanner in = new Scanner(System.in);
         String filePath = in.nextLine();
         in.close();
-        Pair<String, String> nowText = fileEnter(filePath);
-        Pair<String, Boolean> newOutput = textContainer(nowText.getKey(), inputContainer(), new Date());
-        if (newOutput.getValue())
+        FileContent nowText = fileEnter(filePath);
+        ContainerContent newOutput = textContainer(nowText.name, inputContainer(), new Date());
+        if (newOutput.needChange)
         {
-            writer(inputFormatter(nowText.getValue(), nowText.getKey()), newOutput.getKey());
+            writer(inputFormatter(nowText.content, nowText.name), newOutput.content);
         }
     }
 }
